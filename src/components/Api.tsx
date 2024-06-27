@@ -2,9 +2,15 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://api.unsplash.com";
 
-export default async function fetchGallery(query, page) {
+interface ApiResponse<T> {
+  results: T;
+}
+export default async function fetchGallery<T>(
+  query: string,
+  page: number
+): Promise<T> {
   try {
-    const response = await axios.get("/search/photos", {
+    const response = await axios.get<ApiResponse<T>>("/search/photos", {
       params: {
         client_id: "idQEMAAxVDoA0_AnEYE8eUrxYtdMT7nnnEwA8ceawAU",
         query,

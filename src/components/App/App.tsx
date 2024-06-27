@@ -5,24 +5,28 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-// import * as Yup from "yup";
 import ImageModal from "../ImageModal/ImageModal";
 import Modal from "react-modal";
+import { object } from "yup";
 
+type Photo = {
+  urls: string;
+  alt_description: string;
+};
+
+type ModalData = Photo | null;
 export default function App() {
-  const [query, setQuery] = useState("");
-  const [photos, setPhotos] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [showReset, setShowReset] = useState(false);
-  // ============= Modal Window.
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalData, setModalData] = useState(null);
+  const [query, setQuery] = useState<string>("");
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [showReset, setShowReset] = useState<boolean>(false);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [modalData, setModalData] = useState<ModalData>(null);
 
   Modal.setAppElement("#root");
-  function openModal(photo) {
+  function openModal(photo: Photo) {
     setModalData(photo);
     setModalIsOpen(true);
   }
@@ -31,19 +35,11 @@ export default function App() {
     setModalIsOpen(false);
   }
 
-  // ====================
-  // const UserSchema = Yup.object().shape({
-  //   query: Yup.string()
-  //     .trim()
-  //     .min(3, "Too Short")
-  //     .max(50, "Max 50 letters!")
-  //     .required("Is required"),
-  // });
   function handleReset() {
     setShowReset(false);
     setPhotos([]);
   }
-  function handleSearch(newQuery) {
+  function handleSearch(newQuery: string) {
     setShowReset(true);
     setQuery(newQuery);
     setPage(1);
@@ -63,7 +59,7 @@ export default function App() {
         setError(false);
         setIsLoading(true);
 
-        const data = await fetchGallery(query, page);
+        const data = await fetchGallery<Photo[]>(query, page);
         setPhotos((prevPhotos) => {
           return [...prevPhotos, ...data];
         });
@@ -88,7 +84,6 @@ export default function App() {
 
       <SearchBar
         onSearch={handleSearch}
-        // UserSchema={UserSchema}
         onClickReset={handleReset}
         showReset={showReset}
       />
@@ -113,6 +108,3 @@ export default function App() {
     </div>
   );
 }
-// Функція setPhotos використовується в умовному операторі рендеру,
-//  що не є призначенням цієї функції.
-// Функція setPhotos має оновлювати стан, а не використовуватися як умова для рендеру.
