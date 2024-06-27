@@ -7,14 +7,12 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageModal from "../ImageModal/ImageModal";
 import Modal from "react-modal";
-import { object } from "yup";
 
 type Photo = {
   urls: string;
   alt_description: string;
 };
-
-type ModalData = Photo | null;
+// type ModalData = Photo | null;
 export default function App() {
   const [query, setQuery] = useState<string>("");
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -23,7 +21,7 @@ export default function App() {
   const [error, setError] = useState<boolean>(false);
   const [showReset, setShowReset] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [modalData, setModalData] = useState<ModalData>(null);
+  const [modalData, setModalData] = useState<Photo | null>(null);
 
   Modal.setAppElement("#root");
   function openModal(photo: Photo) {

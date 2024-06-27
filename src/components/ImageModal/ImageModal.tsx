@@ -1,5 +1,4 @@
 import Modal from "react-modal";
-
 export default function ImageModal({
   modalData: { urls, alt_description },
   closeModal,
