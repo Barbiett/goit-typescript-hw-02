@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  background-color: aliceblue;
+}
+
+.field {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 30px;
+}
+
+button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 30px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+.icon {
+  padding-left: 10px;
+}
