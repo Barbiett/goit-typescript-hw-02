@@ -2,7 +2,17 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
-export default function SearchBar({ onSearch, onClickReset, showReset }) {
+interface SearchBarProp {
+  onSearch: (newQuery: string) => void;
+  onClickReset: () => void;
+  showReset: boolean;
+}
+
+export default function SearchBar({
+  onSearch,
+  onClickReset,
+  showReset,
+}: SearchBarProp) {
   const notify = () => toast("Empty! Write something");
 
   return (
@@ -19,17 +29,16 @@ export default function SearchBar({ onSearch, onClickReset, showReset }) {
       }}
     >
       <Form className={css.form}>
-        <ErrorMessage
-          name="query"
-          component="span"
+        <div
           style={{
             color: "red",
             textAlign: "center",
             fontSize: "30px",
             paddingRight: "20px",
           }}
-        />
-
+        >
+          <ErrorMessage name="query" component="span" />
+        </div>
         <Field
           className={css.field}
           name="query"

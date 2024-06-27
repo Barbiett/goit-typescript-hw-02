@@ -1,10 +1,17 @@
 import Modal from "react-modal";
+
+import { Photo } from "../App/App";
+interface Props {
+  modalData: Photo | null;
+  closeModal: () => void;
+  isModalOpen: boolean;
+}
 export default function ImageModal({
-  modalData: { urls, alt_description },
+  modalData,
   closeModal,
   isModalOpen,
-}) {
-  const customStyles = {
+}: Props) {
+  const customStyles: Modal.Styles = {
     content: {
       top: "50%",
       left: "50%",
@@ -29,9 +36,11 @@ export default function ImageModal({
       onRequestClose={closeModal}
       isOpen={isModalOpen}
     >
-      <div>
-        <img src={urls.regular} alt={alt_description} />
-      </div>
+      {modalData && (
+        <div>
+          <img src={modalData.urls.regular} alt={modalData.alt_description} />
+        </div>
+      )}
     </Modal>
   );
 }

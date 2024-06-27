@@ -1,7 +1,11 @@
 import css from "./ImageCard.module.css";
+import { Photo } from "../App/App";
+interface Props {
+  photo: Photo;
+}
 export default function ImageCard({
   photo: { urls, alt_description, likes, description, user },
-}) {
+}: Props) {
   return (
     <div className={css.card}>
       <img src={urls.small} alt={alt_description} />

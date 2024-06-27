@@ -8,11 +8,22 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageModal from "../ImageModal/ImageModal";
 import Modal from "react-modal";
 
-type Photo = {
-  urls: string;
+export type Photo = {
+  urls: {
+    small: string;
+    regular: string;
+    description: string;
+  };
+  user: {
+    name: string;
+    instagram_username: string;
+    twitter_username: string;
+  };
   alt_description: string;
+  description: string;
+  likes: number;
+  id: number | string;
 };
-// type ModalData = Photo | null;
 export default function App() {
   const [query, setQuery] = useState<string>("");
   const [photos, setPhotos] = useState<Photo[]>([]);
